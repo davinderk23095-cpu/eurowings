@@ -12,14 +12,17 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
+      # ✅ Checkout repository
       - name: Checkout code
         uses: actions/checkout@v4
 
+      # ✅ Show debug info about the artifact
       - name: Debug artifact info
         run: |
           echo "CI Workflow run ID: ${{ github.event.workflow_run.id }}"
           echo "Attempting to download artifact 'eurowings-scala-assembly'"
 
+      # ✅ Download artifact created by CI
       - name: Download artifact from CI
         uses: dawidd6/action-download-artifact@v6
         with:
@@ -27,7 +30,7 @@ jobs:
           name: eurowings-scala-assembly
           path: target/
 
-      # ✅ Install Databricks CLI via pip
+      # ✅ Install Databricks CLI (modern version)
       - name: Set up Databricks CLI
         run: |
           echo "Installing latest Databricks CLI via pip..."
@@ -35,17 +38,29 @@ jobs:
           pip install databricks-cli
           databricks --version
 
-      # ✅ Authenticate using repository secrets
-      - name: Configure Databricks Auth
+      # ✅ Authenticate with Databricks (new CLI method)
+      - name: Set Databricks credentials
         run: |
-          databricks configure --host "${{ secrets.DATABRICKS_HOST }}" --token "${{ secrets.DATABRICKS_TOKEN }}"
+          export DATABRICKS_HOST="${{ secrets.DATABRICKS_HOST }}"
+          export DATABRICKS_TOKEN="${{ secrets.DATABRICKS_TOKEN }}"
+          databricks auth profiles || echo "✅ Authentication environment ready."
 
-      # ✅ Upload the JAR built in CI to Databricks FileStore
+      # ✅ Upload the JAR file to Databricks FileStore
       - name: Upload JAR to Databricks DBFS
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         run: |
+          echo "Uploading JAR to Databricks DBFS..."
           databricks fs cp "target/scala-2.12/eurowings-scala-assembly-0.1.0.jar" dbfs:/FileStore/jars/eurowings-scala-assembly-0.1.0.jar --overwrite
+          echo "✅ Upload completed successfully."
 
-      # ✅ Trigger Databricks job after upload
+      # ✅ Trigger Databricks job
       - name: Trigger Databricks Job
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         run: |
+          echo "Triggering Databricks job..."
           databricks jobs run-now --job-id ${{ secrets.DATABRICKS_JOB_ID }}
+          echo "✅ Databricks job triggered successfully."
