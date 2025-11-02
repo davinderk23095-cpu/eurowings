@@ -32,7 +32,6 @@ jobs:
           echo "Listing target directory contents..."
           ls -R target || echo "⚠️ No target folder found!"
 
-      # ✅ Correct and stable Databricks CLI setup
       - name: Install Databricks CLI (v0.275.0)
         run: |
           DATABRICKS_VERSION="0.275.0"
@@ -57,7 +56,6 @@ jobs:
         run: |
           echo "✅ Databricks credentials set (via env vars)."
 
-      # ✅ FIXED: Correct command is `workspace list /`
       - name: Verify Databricks Authentication
         env:
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
@@ -67,20 +65,21 @@ jobs:
           ~/databricks/databricks workspace list / || (echo "❌ Invalid Databricks token or insufficient scope" && exit 1)
           echo "✅ Token is valid and workspace is accessible."
 
-      - name: Upload JAR to Databricks DBFS
+      - name: Upload JAR to Databricks DBFS (Private Root)
         env:
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         run: |
-          echo "Uploading JAR to Databricks DBFS..."
+          echo "Uploading JAR to Databricks private DBFS path..."
           JAR_FILE=$(find target -name "*.jar" | head -n 1)
           if [ -z "$JAR_FILE" ]; then
             echo "❌ No JAR file found in target directory!"
             exit 1
           fi
           echo "Found JAR: $JAR_FILE"
-          ~/databricks/databricks fs cp "$JAR_FILE" dbfs:/FileStore/jars/eurowings-scala-assembly-latest.jar --overwrite
-          echo "✅ Upload completed successfully."
+          PRIVATE_PATH="dbfs:/mnt/ci-artifacts/eurowings-scala-assembly-latest.jar"
+          ~/databricks/databricks fs cp "$JAR_FILE" "$PRIVATE_PATH" --overwrite || (echo "❌ Upload failed, check DBFS mount permissions" && exit 1)
+          echo "✅ Upload completed to $PRIVATE_PATH."
 
       - name: Trigger Databricks Job
         env:
