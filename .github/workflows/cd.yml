@@ -77,7 +77,7 @@ jobs:
             exit 1
           fi
           echo "Found JAR: $JAR_FILE"
-          ~/databricks/databricks workspace import --format AUTO "$JAR_FILE" /Shared/eurowings-scala-assembly-latest.jar --overwrite
+          ~/databricks/databricks workspace import --file "$JAR_FILE" --format AUTO --overwrite /Shared/eurowings-scala-assembly-latest.jar
           echo "✅ Upload completed to /Workspace/Shared/eurowings-scala-assembly-latest.jar"
 
       - name: Trigger Databricks Job
