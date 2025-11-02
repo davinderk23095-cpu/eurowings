@@ -1,33 +1,37 @@
-name: Scala CI Build
+name: CI - Build Scala Project
 
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v4
+      - name: Set up Java
+        uses: actions/setup-java@v3
         with:
-          java-version: '17'
-          distribution: 'temurin'
+          distribution: temurin
+          java-version: 17
 
-      - name: Cache SBT dependencies
-        uses: actions/cache@v4
+      - name: Set up Scala and sbt
+        uses: olafurpg/setup-scala@v14
         with:
-          path: |
-            ~/.ivy2/cache
-            ~/.sbt
-          key: ${{ runner.os }}-sbt-${{ hashFiles('**/build.sbt') }}
+          java-version: adopt@1.17
 
-      - name: Run Unit Tests (skip for CI)
+      - name: Run compile (skip tests)
         run: sbt clean compile
- 
+
+      - name: Package Assembly JAR
+        run: sbt assembly
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: eurowings-scala-assembly
+          path: target/scala-2.12/*.jar
