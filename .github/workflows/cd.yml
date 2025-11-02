@@ -34,8 +34,8 @@ jobs:
 
       - name: Upload JAR to Databricks DBFS
         run: |
-          databricks fs cp "target/scala-2.12/eurowings-scala-challenge-assembly-0.1.0.jar" dbfs:/FileStore/jars/eurowings-scala-challenge-assembly-0.1.0.jar --overwrite
-
+            databricks fs cp "target/scala-2.12/eurowings-scala-assembly-0.1.0.jar" dbfs:/FileStore/jars/eurowings-scala-assembly-0.1.0.jar --overwrite
+      
       - name: Trigger Databricks Job
         run: |
           databricks jobs run-now --job-id ${{ secrets.DATABRICKS_JOB_ID }}
