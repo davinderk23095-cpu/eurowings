@@ -27,14 +27,15 @@ jobs:
           name: eurowings-scala-assembly
           path: target/
 
-      # ✅ Add THIS block here
+      # ✅ REPLACE your old CLI setup step with THIS block
       - name: Set up Databricks CLI
         run: |
           DATABRICKS_VERSION="0.275.0"
           echo "Downloading Databricks CLI v$DATABRICKS_VERSION..."
-          curl -L -o databricks.zip \
-            "https://github.com/databricks/cli/releases/download/v${DATABRICKS_VERSION}/databricks_linux_amd64.zip"
-          unzip databricks.zip -d ~/databricks
+          curl -L -o databricks.tar.gz \
+            "https://github.com/databricks/cli/releases/download/v${DATABRICKS_VERSION}/databricks_linux_amd64.tar.gz"
+          mkdir -p ~/databricks
+          tar -xzf databricks.tar.gz -C ~/databricks
           chmod +x ~/databricks/databricks
           echo "$HOME/databricks" >> $GITHUB_PATH
           databricks version
