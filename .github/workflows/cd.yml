@@ -52,7 +52,13 @@ jobs:
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         run: |
           echo "Uploading JAR to Databricks DBFS..."
-          databricks fs cp "target/scala-2.12/eurowings-scala-assembly-0.1.0.jar" dbfs:/FileStore/jars/eurowings-scala-assembly-0.1.0.jar --overwrite
+          JAR_FILE=$(find target -name "*.jar" | head -n 1)
+          if [ -z "$JAR_FILE" ]; then
+            echo "❌ No JAR file found in target directory!"
+            exit 1
+          fi
+          echo "Found JAR: $JAR_FILE"
+          databricks fs cp "$JAR_FILE" dbfs:/FileStore/jars/eurowings-scala-assembly-latest.jar --overwrite
           echo "✅ Upload completed successfully."
 
       - name: Trigger Databricks Job
