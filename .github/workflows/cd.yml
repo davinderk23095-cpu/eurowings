@@ -20,7 +20,6 @@ jobs:
           echo "CI Workflow run ID: ${{ github.event.workflow_run.id }}"
           echo "Attempting to download artifact 'eurowings-scala-assembly'"
 
-      # 🧩 Use robust download step
       - name: Download artifact from CI
         uses: dawidd6/action-download-artifact@v6
         with:
@@ -28,10 +27,15 @@ jobs:
           name: eurowings-scala-assembly
           path: target/
 
+      # ✅ Add THIS block here
       - name: Set up Databricks CLI
         run: |
-          curl -fsSL https://github.com/databricks/cli/releases/latest/download/databricks_linux_amd64.zip -o databricks.zip
+          DATABRICKS_VERSION="0.275.0"
+          echo "Downloading Databricks CLI v$DATABRICKS_VERSION..."
+          curl -L -o databricks.zip \
+            "https://github.com/databricks/cli/releases/download/v${DATABRICKS_VERSION}/databricks_linux_amd64.zip"
           unzip databricks.zip -d ~/databricks
+          chmod +x ~/databricks/databricks
           echo "$HOME/databricks" >> $GITHUB_PATH
           databricks version
 
