@@ -46,6 +46,16 @@ jobs:
           export DATABRICKS_TOKEN="${{ secrets.DATABRICKS_TOKEN }}"
           databricks auth profiles || echo "✅ Authentication environment ready."
 
+      
+      - name: Verify Databricks Authentication
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+        run: |
+          echo "Testing Databricks token..."
+          databricks current-user me || (echo "❌ Invalid Databricks token or expired." && exit 1)
+          echo "✅ Token is valid. Proceeding with upload."
+
       - name: Upload JAR to Databricks DBFS
         env:
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
@@ -54,7 +64,7 @@ jobs:
           echo "Uploading JAR to Databricks DBFS..."
           JAR_FILE=$(find target -name "*.jar" | head -n 1)
           if [ -z "$JAR_FILE" ]; then
-            echo "❌ No JAR file found in target directory!"
+            echo "X No JAR file found in target directory!"
             exit 1
           fi
           echo "Found JAR: $JAR_FILE"
