@@ -27,34 +27,38 @@ jobs:
           name: eurowings-scala-assembly
           path: target/
 
-      # 🧩 ADD THIS DEBUG STEP HERE
       - name: List downloaded files
         run: |
           echo "Listing target directory contents..."
           ls -R target || echo "⚠️ No target folder found!"
 
-      - name: Set up Databricks CLI
+      # ✅ Use NEW Databricks CLI
+      - name: Install Databricks CLI (v0.275.0)
         run: |
-          echo "Installing latest Databricks CLI via pip..."
-          python3 -m pip install --upgrade pip
-          pip install databricks-cli
-          databricks --version
+          DATABRICKS_VERSION="0.275.0"
+          echo "Installing Databricks CLI v$DATABRICKS_VERSION..."
+          curl -L -o databricks_cli.zip \
+            "https://github.com/databricks/cli/releases/download/v${DATABRICKS_VERSION}/databricks_cli_${DATABRICKS_VERSION}_linux_amd64.zip"
+          unzip databricks_cli.zip -d ~/databricks
+          chmod +x ~/databricks/databricks
+          echo "$HOME/databricks" >> $GITHUB_PATH
+          databricks version
 
       - name: Set Databricks credentials
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         run: |
-          export DATABRICKS_HOST="${{ secrets.DATABRICKS_HOST }}"
-          export DATABRICKS_TOKEN="${{ secrets.DATABRICKS_TOKEN }}"
-          databricks auth profiles || echo "✅ Authentication environment ready."
+          echo "✅ Databricks credentials set."
 
-      
       - name: Verify Databricks Authentication
         env:
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         run: |
-          echo "Testing Databricks token..."
-          databricks current-user me || (echo "❌ Invalid Databricks token or expired." && exit 1)
-          echo "✅ Token is valid. Proceeding with upload."
+          echo "Testing Databricks token with new CLI..."
+          databricks workspace ls / || (echo "❌ Invalid Databricks token or scope" && exit 1)
+          echo "✅ Token is valid and workspace is accessible."
 
       - name: Upload JAR to Databricks DBFS
         env:
@@ -64,7 +68,7 @@ jobs:
           echo "Uploading JAR to Databricks DBFS..."
           JAR_FILE=$(find target -name "*.jar" | head -n 1)
           if [ -z "$JAR_FILE" ]; then
-            echo "X No JAR file found in target directory!"
+            echo "❌ No JAR file found in target directory!"
             exit 1
           fi
           echo "Found JAR: $JAR_FILE"
@@ -76,6 +80,5 @@ jobs:
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         run: |
-          echo "Triggering Databricks job..."
+          echo "🚀 Triggering Databricks job..."
           databricks jobs run-now --job-id ${{ secrets.DATABRICKS_JOB_ID }}
-          echo "✅ Databricks job triggered successfully."
