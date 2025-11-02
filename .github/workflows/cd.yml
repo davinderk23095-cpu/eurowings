@@ -32,17 +32,24 @@ jobs:
           echo "Listing target directory contents..."
           ls -R target || echo "⚠️ No target folder found!"
 
-      # ✅ Use NEW Databricks CLI
+      # 🧩 Replace the old CLI setup with this new step
       - name: Install Databricks CLI (v0.275.0)
         run: |
           DATABRICKS_VERSION="0.275.0"
           echo "Installing Databricks CLI v$DATABRICKS_VERSION..."
           curl -L -o databricks_cli.zip \
             "https://github.com/databricks/cli/releases/download/v${DATABRICKS_VERSION}/databricks_cli_${DATABRICKS_VERSION}_linux_amd64.zip"
-          unzip databricks_cli.zip -d ~/databricks
+          
+          mkdir -p ~/databricks
+          unzip -o databricks_cli.zip -d ~/databricks
           chmod +x ~/databricks/databricks
+          
+          # 👇 Add to PATH for *this session* too
+          export PATH="$HOME/databricks:$PATH"
           echo "$HOME/databricks" >> $GITHUB_PATH
-          databricks version
+          
+          echo "Verifying installation..."
+          ~/databricks/databricks version || echo "⚠️ Databricks CLI check failed"
 
       - name: Set Databricks credentials
         env:
@@ -57,7 +64,7 @@ jobs:
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         run: |
           echo "Testing Databricks token with new CLI..."
-          databricks workspace ls / || (echo "❌ Invalid Databricks token or scope" && exit 1)
+          ~/databricks/databricks workspace ls / || (echo "❌ Invalid Databricks token or scope" && exit 1)
           echo "✅ Token is valid and workspace is accessible."
 
       - name: Upload JAR to Databricks DBFS
@@ -72,7 +79,7 @@ jobs:
             exit 1
           fi
           echo "Found JAR: $JAR_FILE"
-          databricks fs cp "$JAR_FILE" dbfs:/FileStore/jars/eurowings-scala-assembly-latest.jar --overwrite
+          ~/databricks/databricks fs cp "$JAR_FILE" dbfs:/FileStore/jars/eurowings-scala-assembly-latest.jar --overwrite
           echo "✅ Upload completed successfully."
 
       - name: Trigger Databricks Job
@@ -81,4 +88,4 @@ jobs:
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         run: |
           echo "🚀 Triggering Databricks job..."
-          databricks jobs run-now --job-id ${{ secrets.DATABRICKS_JOB_ID }}
+          ~/databricks/databricks jobs run-now --job-id ${{ secrets.DATABRICKS_JOB_ID }}
