@@ -15,13 +15,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 👇 Debug step added here (before downloading artifact)
-      - name: Debug artifact list
-        run: echo "Attempting to download artifact from CI run..."
+      - name: Debug artifact info
+        run: |
+          echo "CI Workflow run ID: ${{ github.event.workflow_run.id }}"
+          echo "Attempting to download artifact 'eurowings-scala-assembly'"
 
+      # 🧩 Use robust download step
       - name: Download artifact from CI
-        uses: actions/download-artifact@v4
+        uses: dawidd6/action-download-artifact@v6
         with:
+          workflow: ci.yml
           name: eurowings-scala-assembly
           path: target/
 
