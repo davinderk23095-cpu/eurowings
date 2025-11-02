@@ -1,0 +1,35 @@
+name: Databricks Deployment
+
+on:
+  workflow_run:
+    workflows: ["Scala CI Build"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install Databricks CLI
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/databricks/cli/main/install.sh | bash
+          sudo mv databricks /usr/local/bin/
+
+      - name: Upload JAR to Databricks DBFS
+        run: |
+          databricks fs cp target/scala-2.12/eurowings-scala-challenge-assembly-0.1.0.jar dbfs:/FileStore/jars/eurowings-scala-challenge.jar --overwrite
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+
+      - name: Trigger Databricks Job (optional)
+        run: |
+          databricks jobs run-now --job-id 6798
+        env:
+          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
