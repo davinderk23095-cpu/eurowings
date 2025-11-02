@@ -1,35 +1,41 @@
-name: Databricks Deployment
+name: CD - Deploy to Databricks
 
 on:
   workflow_run:
-    workflows: ["Scala CI Build"]
+    workflows: ["CI - Build Scala Project"]
     types:
       - completed
 
 jobs:
   deploy:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install Databricks CLI
+      - name: Download artifact from CI
+        uses: actions/download-artifact@v4
+        with:
+          name: eurowings-scala-assembly
+          path: target/
+
+      - name: Set up Databricks CLI
         run: |
-          curl -fsSL https://raw.githubusercontent.com/databricks/cli/main/install.sh | bash
-          sudo mv databricks /usr/local/bin/
+          curl -fsSL https://github.com/databricks/cli/releases/latest/download/databricks_linux_amd64.zip -o databricks.zip
+          unzip databricks.zip -d ~/databricks
+          echo "$HOME/databricks" >> $GITHUB_PATH
+          databricks version
+
+      - name: Configure Databricks Auth
+        run: |
+          databricks configure --host "${{ secrets.DATABRICKS_HOST }}" --token "${{ secrets.DATABRICKS_TOKEN }}"
 
       - name: Upload JAR to Databricks DBFS
         run: |
-          databricks fs cp target/scala-2.12/eurowings-scala-challenge-assembly-0.1.0.jar dbfs:/FileStore/jars/eurowings-scala-challenge.jar --overwrite
-        env:
-          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
-          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+          databricks fs cp "target/scala-2.12/eurowings-scala-challenge-assembly-0.1.0.jar" dbfs:/FileStore/jars/eurowings-scala-challenge-assembly-0.1.0.jar --overwrite
 
-      - name: Trigger Databricks Job (optional)
+      - name: Trigger Databricks Job
         run: |
-          databricks jobs run-now --job-id 6798
-        env:
-          DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
-          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+          databricks jobs run-now --job-id ${{ secrets.DATABRICKS_JOB_ID }}
