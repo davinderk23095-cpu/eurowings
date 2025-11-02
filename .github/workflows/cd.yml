@@ -65,21 +65,20 @@ jobs:
           ~/databricks/databricks workspace list / || (echo "❌ Invalid Databricks token or insufficient scope" && exit 1)
           echo "✅ Token is valid and workspace is accessible."
 
-      - name: Upload JAR to Databricks DBFS (Private Root)
+      - name: Upload JAR to Databricks Workspace
         env:
           DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
           DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
         run: |
-          echo "Uploading JAR to Databricks private DBFS path..."
+          echo "Uploading JAR to Databricks Workspace path..."
           JAR_FILE=$(find target -name "*.jar" | head -n 1)
           if [ -z "$JAR_FILE" ]; then
             echo "❌ No JAR file found in target directory!"
             exit 1
           fi
           echo "Found JAR: $JAR_FILE"
-          PRIVATE_PATH="dbfs:/mnt/ci-artifacts/eurowings-scala-assembly-latest.jar"
-          ~/databricks/databricks fs cp "$JAR_FILE" "$PRIVATE_PATH" --overwrite || (echo "❌ Upload failed, check DBFS mount permissions" && exit 1)
-          echo "✅ Upload completed to $PRIVATE_PATH."
+          ~/databricks/databricks workspace import --format AUTO "$JAR_FILE" /Shared/eurowings-scala-assembly-latest.jar --overwrite
+          echo "✅ Upload completed to /Workspace/Shared/eurowings-scala-assembly-latest.jar"
 
       - name: Trigger Databricks Job
         env:
