@@ -1,0 +1,7 @@
+{
+  "recommendations": [
+    "scalameta.metals",
+    "lightbend.vscode-sbt-scala",
+    "redhat.vscode-yaml"
+  ]
+}

@@ -1,0 +1,23 @@
+[0m[[0m[0mdebug[0m] [0m[0mCreated transactional ClassFileManager with tempDir = C:\Users\Davinder kaur\Downloads\eurowings-scala-challenge\target\scala-2.12\classes.bak[0m
+[0m[[0m[0mdebug[0m] [0m[0mAbout to delete class files:[0m
+[0m[[0m[0mdebug[0m] [0m[0mWe backup class files:[0m
+[0m[[0m[0mdebug[0m] [0m[0mCreated transactional ClassFileManager with tempDir = C:\Users\Davinder kaur\Downloads\eurowings-scala-challenge\target\scala-2.12\classes.bak[0m
+[0m[[0m[0mdebug[0m] [0m[0mAbout to delete class files:[0m
+[0m[[0m[0mdebug[0m] [0m[0mWe backup class files:[0m
+[0m[[0m[0mdebug[0m] [0m[0mRegistering generated classes:[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Main.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	VertriebskanalTransform$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	BronzeIngest.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Main$$anonfun$1.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	SilverTransform.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	AirportsTransform.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	AirportsTransform$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	SilverTransform$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	VertriebskanalGold$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	AppConfig$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	VertriebskanalGold.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	BronzeIngest$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	AppConfig.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	VertriebskanalTransform.class[0m
+[0m[[0m[0mdebug[0m] [0m[0m	Main$.class[0m
+[0m[[0m[0mdebug[0m] [0m[0mRemoving the temporary directory used for backing up class files: C:\Users\Davinder kaur\Downloads\eurowings-scala-challenge\target\scala-2.12\classes.bak[0m

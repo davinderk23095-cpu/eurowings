@@ -1,0 +1,167 @@
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(reload, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(sbtStashOnFailure, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(onFailure loadFailed, None, None)[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(loadp, None, None)[0m
+[0m[[0m[0minfo[0m] [0m[0mwelcome to sbt 1.11.7 (Microsoft Java 17.0.16)[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                    Load.loadUnit: plugins took 31.8153ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                    Load.loadUnit: defsScala took 0.0076ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m[Loading] Scanning directory C:\Users\Davinder kaur\.sbt\1.0\plugins[0m
+[0m[[0m[0mdebug[0m] [0m[0m[Loading] Found non-root projects [0m
+[0m[[0m[0mdebug[0m] [0m[0m[Loading] Done in C:\Users\Davinder kaur\.sbt\1.0\plugins, returning: ()[0m
+[0m[[0m[0mdebug[0m] [0m[0mdeducing auto plugins based on known facts Set(Atom(sbt.plugins.CorePlugin)) and clauses Clauses(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.ScriptedPlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.SbtPlugin),Set(Atom(sbt.ScriptedPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.SemanticdbPlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.MiniDependencyTreePlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.SemanticdbPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.Giter8TemplatePlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.MiniDependencyTreePlugin))))[0m
+[0m[[0m[0mdebug[0m] [0m[0m  :: deduced result: Matched(sbt.plugins.CorePlugin,sbt.plugins.Giter8TemplatePlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,sbt.plugins.MiniDependencyTreePlugin,sbt.plugins.JUnitXmlReportPlugin,sbt.plugins.SemanticdbPlugin)[0m
+[0m[[0m[0mdebug[0m] [0m[0mPlugins.deducer#function took 0.6822 ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                        Load.resolveProject(global-plugins) took 1.0195ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                      Load.loadTransitive: finalizeProject(Project(id global-plugins, base: C:\Users\Davinder kaur\.sbt\1.0\plugins, plugins: List(<none>))) took 1.9437ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m[Loading] Done in C:\Users\Davinder kaur\.sbt\1.0\plugins, returning: (global-plugins)[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                    Load.loadUnit: loadedProjectsRaw took 2.749ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                    Load.loadUnit: cleanEvalClasses took 0.0101ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                  Load.loadUnit(file:/C:/Users/Davinder%20kaur/.sbt/1.0/plugins/, ...) took 36.2886ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                Load.apply: load took 37.8195ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                Load.apply: resolveProjects took 0.0936ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                Load.apply: finalTransforms took 9.0264ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                Load.apply: config.delegates took 0.2284ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                Load.apply: Def.make(settings)... took 45.8492ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                Load.apply: structureIndex took 18.0174ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                Load.apply: mkStreams took 0.0054ms[0m
+[0m[[0m[0minfo[0m] [0m[0mloading global plugins from C:\Users\Davinder kaur\.sbt\1.0\plugins[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                              Load.defaultLoad until apply took 334.0975ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                                    Load.loadUnit: plugins took 36.2633ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                                    Load.loadUnit: defsScala took 0.0082ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m[Loading] Scanning directory C:\Users\Davinder kaur\Downloads\eurowings-scala-challenge\project\project\project[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                                      Load.loadUnit: mkEval took 0.436ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m[Loading] Found non-root projects [0m
+[0m[[0m[0mdebug[0m] [0m[0m[Loading] Done in C:\Users\Davinder kaur\Downloads\eurowings-scala-challenge\project\project\project, returning: ()[0m
+[0m[[0m[0mdebug[0m] [0m[0mdeducing auto plugins based on known facts Set(Atom(sbt.plugins.CorePlugin)) and clauses Clauses(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.ScriptedPlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.SbtPlugin),Set(Atom(sbt.ScriptedPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.SemanticdbPlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.MiniDependencyTreePlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.SemanticdbPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.Giter8TemplatePlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.MiniDependencyTreePlugin))))[0m
+[0m[[0m[0mdebug[0m] [0m[0m  :: deduced result: Matched(sbt.plugins.CorePlugin,sbt.plugins.Giter8TemplatePlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,sbt.plugins.MiniDependencyTreePlugin,sbt.plugins.JUnitXmlReportPlugin,sbt.plugins.SemanticdbPlugin)[0m
+[0m[[0m[0mdebug[0m] [0m[0mPlugins.deducer#function took 0.7192 ms[0m
+[0m[[0m[0minfo[0m] [0m[0mloading settings for project eurowings-scala-challenge-build-build-build from metals.sbt...[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                                        Load.resolveProject(eurowings-scala-challenge-build-build-build) took 1.7136ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                                      Load.loadTransitive: finalizeProject(Project(id eurowings-scala-challenge-build-build-build, base: C:\Users\Davinder kaur\Downloads\eurowings-scala-challenge\project\project\project, plugins: List(<none>))) took 2.7323ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m[Loading] Done in C:\Users\Davinder kaur\Downloads\eurowings-scala-challenge\project\project\project, returning: (eurowings-scala-challenge-build-build-build)[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                                    Load.loadUnit: loadedProjectsRaw took 21.5388ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                                    Load.loadUnit: cleanEvalClasses took 5.4199ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                                  Load.loadUnit(file:/C:/Users/Davinder%20kaur/Downloads/eurowings-scala-challenge/project/project/project/, ...) took 64.4935ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                                Load.apply: load took 66.3277ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                                Load.apply: resolveProjects took 0.0792ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                                Load.apply: finalTransforms took 11.688ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                                Load.apply: config.delegates took 0.2802ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                                Load.apply: Def.make(settings)... took 43.0265ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                                Load.apply: structureIndex took 15.8832ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                                Load.apply: mkStreams took 0.0034ms[0m
+[0m[[0m[0minfo[0m] [0m[0mloading project definition from C:\Users\Davinder kaur\Downloads\eurowings-scala-challenge\project\project\project[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                              Load.loadUnit: plugins took 348.7792ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                              Load.loadUnit: defsScala took 0.008ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m[Loading] Scanning directory C:\Users\Davinder kaur\Downloads\eurowings-scala-challenge\project\project[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                                Load.loadUnit: mkEval took 0.5344ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m[Loading] Found non-root projects [0m
+[0m[[0m[0mdebug[0m] [0m[0m[Loading] Done in C:\Users\Davinder kaur\Downloads\eurowings-scala-challenge\project\project, returning: ()[0m
+[0m[[0m[0mdebug[0m] [0m[0mdeducing auto plugins based on known facts Set(Atom(sbt.plugins.CorePlugin)) and clauses Clauses(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.ScriptedPlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.SbtPlugin),Set(Atom(sbt.ScriptedPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.SemanticdbPlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.MiniDependencyTreePlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(bloop.integrations.sbt.BloopPlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.SemanticdbPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.Giter8TemplatePlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.MiniDependencyTreePlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.JvmPlugin),Set(Atom(bloop.integrations.sbt.BloopPlugin))))[0m
+[0m[[0m[0mdebug[0m] [0m[0m  :: deduced result: Matched(sbt.plugins.CorePlugin,sbt.plugins.Giter8TemplatePlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,bloop.integrations.sbt.BloopPlugin,sbt.plugins.MiniDependencyTreePlugin,sbt.plugins.JUnitXmlReportPlugin,sbt.plugins.SemanticdbPlugin)[0m
+[0m[[0m[0mdebug[0m] [0m[0mPlugins.deducer#function took 0.7617 ms[0m
+[0m[[0m[0minfo[0m] [0m[0mloading settings for project eurowings-scala-challenge-build-build from metals.sbt...[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                                  Load.resolveProject(eurowings-scala-challenge-build-build) took 33.8632ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                                Load.loadTransitive: finalizeProject(Project(id eurowings-scala-challenge-build-build, base: C:\Users\Davinder kaur\Downloads\eurowings-scala-challenge\project\project, plugins: List(<none>))) took 34.973ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m[Loading] Done in C:\Users\Davinder kaur\Downloads\eurowings-scala-challenge\project\project, returning: (eurowings-scala-challenge-build-build)[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                              Load.loadUnit: loadedProjectsRaw took 55.6635ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                              Load.loadUnit: cleanEvalClasses took 7.42ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                            Load.loadUnit(file:/C:/Users/Davinder%20kaur/Downloads/eurowings-scala-challenge/project/project/, ...) took 412.8576ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                          Load.apply: load took 414.5154ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                          Load.apply: resolveProjects took 0.1068ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                          Load.apply: finalTransforms took 15.3642ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                          Load.apply: config.delegates took 0.2103ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                          Load.apply: Def.make(settings)... took 43.829ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                          Load.apply: structureIndex took 15.6076ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                          Load.apply: mkStreams took 0.0044ms[0m
+[0m[[0m[0minfo[0m] [0m[0mloading project definition from C:\Users\Davinder kaur\Downloads\eurowings-scala-challenge\project\project[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: bloopInstall[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[32msuccess[0m] [0m[0mGenerated .bloop\eurowings-scala-challenge-build-build.json[0m
+[0m[[0m[32msuccess[0m] [0m[0mTotal time: 1 s, completed 2 Nov 2025, 04:42:53[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                        Load.loadUnit: plugins took 1799.3682ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                        Load.loadUnit: defsScala took 0.0073ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m[Loading] Scanning directory C:\Users\Davinder kaur\Downloads\eurowings-scala-challenge\project[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                          Load.loadUnit: mkEval took 0.4598ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m[Loading] Found non-root projects [0m
+[0m[[0m[0mdebug[0m] [0m[0m[Loading] Done in C:\Users\Davinder kaur\Downloads\eurowings-scala-challenge\project, returning: ()[0m
+[0m[[0m[0mdebug[0m] [0m[0mdeducing auto plugins based on known facts Set(Atom(sbt.plugins.CorePlugin)) and clauses Clauses(Clause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.IvyPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.ScriptedPlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.SbtPlugin),Set(Atom(sbt.ScriptedPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.SemanticdbPlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.JUnitXmlReportPlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.MiniDependencyTreePlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(bloop.integrations.sbt.BloopPlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.IvyPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.IvyPlugin),Set(Atom(sbt.plugins.JvmPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.SemanticdbPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.JUnitXmlReportPlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.CorePlugin),Set(Atom(sbt.plugins.Giter8TemplatePlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.JvmPlugin),Set(Atom(sbt.plugins.MiniDependencyTreePlugin)))[0m
+[0m[[0m[0mdebug[0m] [0m[0mClause(Atom(sbt.plugins.JvmPlugin),Set(Atom(bloop.integrations.sbt.BloopPlugin))))[0m
+[0m[[0m[0mdebug[0m] [0m[0m  :: deduced result: Matched(sbt.plugins.CorePlugin,sbt.plugins.Giter8TemplatePlugin,sbt.plugins.IvyPlugin,sbt.plugins.JvmPlugin,bloop.integrations.sbt.BloopPlugin,sbt.plugins.MiniDependencyTreePlugin,sbt.plugins.JUnitXmlReportPlugin,sbt.plugins.SemanticdbPlugin)[0m
+[0m[[0m[0mdebug[0m] [0m[0mPlugins.deducer#function took 0.7787 ms[0m
+[0m[[0m[0minfo[0m] [0m[0mloading settings for project eurowings-scala-challenge-build from metals.sbt, plugins.sbt...[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                            Load.resolveProject(eurowings-scala-challenge-build) took 28.1676ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                          Load.loadTransitive: finalizeProject(Project(id eurowings-scala-challenge-build, base: C:\Users\Davinder kaur\Downloads\eurowings-scala-challenge\project, plugins: List(<none>))) took 29.2922ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m[Loading] Done in C:\Users\Davinder kaur\Downloads\eurowings-scala-challenge\project, returning: (eurowings-scala-challenge-build)[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                        Load.loadUnit: loadedProjectsRaw took 69.795ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                        Load.loadUnit: cleanEvalClasses took 11.1084ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                      Load.loadUnit(file:/C:/Users/Davinder%20kaur/Downloads/eurowings-scala-challenge/project/, ...) took 1881.1888ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                    Load.apply: load took 1883.1121ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                    Load.apply: resolveProjects took 0.1392ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                    Load.apply: finalTransforms took 17.1702ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                    Load.apply: config.delegates took 0.2183ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                    Load.apply: Def.make(settings)... took 55.0022ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                    Load.apply: structureIndex took 19.4852ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                    Load.apply: mkStreams took 0.0038ms[0m
+[0m[[0m[0minfo[0m] [0m[0mloading project definition from C:\Users\Davinder kaur\Downloads\eurowings-scala-challenge\project[0m
+[0m[[0m[0mdebug[0m] [0m[0mEvaluating tasks: bloopInstall[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[32msuccess[0m] [0m[0mGenerated .bloop\eurowings-scala-challenge-build.json[0m
+[0m[[0m[32msuccess[0m] [0m[0mTotal time: 1 s, completed 2 Nov 2025, 04:42:54[0m
+[0m[[0m[0mdebug[0m] [0m[0mRunning task... Cancel: Signal, check cycles: false, forcegc: true[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                  Load.loadUnit: plugins took 3409.5759ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                  Load.loadUnit: defsScala took 0.0065ms[0m
+[0m[[0m[0mdebug[0m] [0m[0m[Loading] Scanning directory C:\Users\Davinder kaur\Downloads\eurowings-scala-challenge[0m
+[0m[[0m[0mdebug[0m] [0m[0m                                                                                                                                                                                                                                    Load.loadUnit: mkEval took 0.4062ms[0m
+[0m[[0m[31merror[0m] [0m[0mType error in expression[0m
+[0m[[0m[0mdebug[0m] [0m[0m> Exec(loadFailed, None, None)[0m
+[0m[[0m[33mwarn[0m] [0m[0mProject loading failed: (r)etry, (q)uit, (l)ast, or (i)gnore? (default: r)[0m

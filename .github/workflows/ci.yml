@@ -1,0 +1,29 @@
+name: Build & Test Scala Project
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Scala + Java
+        uses: olafurpg/setup-scala@v14
+        with:
+          java-version: '17'
+
+      - name: Run Unit Tests
+        run: sbt clean test
+
+      - name: Package Assembly JAR
+        run: sbt assembly
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: eurowings-scala-jar
+          path: target/scala-2.12/*.jar
