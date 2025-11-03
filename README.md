@@ -61,7 +61,6 @@ Give it permission to execute:
 
 ```bash
 chmod 400 run.sh
-chmod +x run.sh
 ./run.sh
 ```
 
