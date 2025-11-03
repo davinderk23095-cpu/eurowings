@@ -96,3 +96,7 @@ sbt clean assembly
 spark-submit `
   --class com.eurowingsholidays.ingest.Main `
   target/scala-2.12/eurowings-scala-challenge-assembly-0.1.0.jar
+
+
+### ✅ Expected Outcome After successful execution:
+ - Your raw data will appear under /bronze/... directories. - Cleaned data will be available in /silver/.... - Final analytical data will be in /gold/..., ready for reporting or dashboards. now it should be ok and it should be proper no duplicate proper as as it is impoetnat my job
