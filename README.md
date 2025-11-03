@@ -1,5 +1,9 @@
 # Eurowings Scala Challenge
 
+**Author:** Davinder Kaur  
+**Date:** November 2025  
+**Technologies:** Scala, Apache Spark, Azure Databricks, Azure DevOps
+
 ##  Task 1 – Spark Data Ingestion and Preparation
 
 ### Overview
@@ -41,7 +45,7 @@ You can run the project manually or using a helper script.
 #### Option 1 – Direct Commands
 ```
 sbt clean assembly
-spark-submit --class com.eurowingsholidays.ingest.Main target/scala-2.12/eurowings-scala-challenge-assembly-0.1.0.
+spark-submit --class com.eurowingsholidays.ingest.Main target/scala-2.12/eurowings-scala-challenge-assembly-0.1.0.jar
 ```
 #### Option 2 – Using a Script
 
@@ -73,11 +77,9 @@ This makes the project runnable on all platforms (Windows via Git Bash or Linux/
 
 ##### Output Summary
 
-  - /bronze: Raw CSVs with ingestion date partitions.
-
-  - /silver: Cleaned and standardized datasets.
- 
-  - /gold: Final analytics-ready data with derived metrics.
+ - **/bronze:** Raw CSVs with ingestion date partitions.
+ - **/silver:** Cleaned and standardized datasets.
+ - **/gold:** Final analytics-ready data with derived metrics.
 
 
 
@@ -135,7 +137,8 @@ Once started, it runs automatically — deploying the same artifact used in Test
 The pipeline also generates and publishes **release documentation** (build version, change summary, configuration notes)  
 automatically to the project Wiki or release page in Azure DevOps.
 
-After deployment, a **manual four-eyes check** is performed to verify:  
+After deployment, a **manual four-eyes check** is performed to verify:
+  
 - Key Vault secrets and environment-specific settings.  
 - Connection parameters, permissions, and access configurations.  
 - That all expected Databricks jobs, clusters, and data outputs are running correctly.  
@@ -168,7 +171,7 @@ To make the pipeline stable and enterprise-ready, a few key improvements are req
 ### Key Improvements
 - Use **Delta Lake** for ACID updates, schema evolution, and history.  
 - Build a **Star Schema** in the Gold layer (fact + dimensions).  
-- Automate job triggers with **Databricks Workflows** or **ADF**.  
+- Orchestrate and schedule jobs through **Databricks Workflows**, triggered automatically by the **Azure DevOps pipeline** for Test and manually for Prod releases.  
 - Add **data-quality checks** (Great Expectations / Deequ).  
 - Centralize **monitoring and alerts** in Azure Log Analytics.  
 - Secure access via **Key Vault**, RBAC, and encryption.  
@@ -176,6 +179,11 @@ To make the pipeline stable and enterprise-ready, a few key improvements are req
 
 ---
 
+Access to Databricks jobs can be restricted per user or group.  
+Each pipeline (job) has its own permissions, so only authorized users can view or run their assigned workflows — ensuring data isolation and secure collaboration.
+
+---
 ### Summary
 A **Delta Lakehouse** with **Bronze/Silver/Gold layers** and a **Star Schema** in Gold delivers clean, reliable, and scalable data.  
-Deployed through **Azure DevOps CI/CD** with nightly testing and controlled production releases, it ensures automation, quality, and easy analytics integration.
+Deployed through **Azure DevOps CI/CD** with nightly testing and controlled production releases, it ensures automation, quality, and easy analytics integration.  
+Together, these improvements make the pipeline robust, secure, and fully production-ready for automated operation in the Databricks environment.
