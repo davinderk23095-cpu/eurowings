@@ -125,10 +125,10 @@ PR → Merge to **Main** (after code review)
  └ Publish artifact to Azure Artifacts  
 &emsp;│  
 &emsp;▼  
-🔁 **Nightly deploy** from **Main → Test** (automatic)  
+  **Nightly deploy** from **Main → Test** (automatic)  
 &emsp;│  
 &emsp;▼  
-🧱 **Manual Approval → Deploy to Prod**
+  **Manual Approval → Deploy to Prod**
 
 The Production release pipeline is triggered **manually** after validation and approval.  
 Once started, it runs automatically — deploying the same artifact used in Test to the **Prod Databricks workspace**.  
