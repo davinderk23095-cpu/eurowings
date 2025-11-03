@@ -128,10 +128,18 @@ PR → Merge to **Main** (after code review)
 🔁 **Nightly deploy** from **Main → Test** (automatic)  
 &emsp;│  
 &emsp;▼  
-  **Manual approval → Deploy to Prod** using Databricks CLI or REST API  
-  • Inject secrets and configs from Azure Key Vault  
-  • Validate IP allow-lists and environment variables  
-  • Trigger job via `databricks jobs run-now`
+  **Manual Approval → Deploy to Prod**  
+    The Production release pipeline is triggered **manually** after validation and approval.  
+    Once started, it runs automatically — deploying the same artifact used in Test to the **Prod Databricks workspace**.  
+    The pipeline also generates and publishes **release documentation** (build version, change summary, configuration notes)  
+    automatically to the project Wiki or release page in Azure DevOps.
+
+    After deployment, a **manual four-eyes check** is performed to verify:
+    - Key Vault secrets and environment-specific settings.  
+    - Connection parameters, permissions, and access configurations.  
+    - That all expected Databricks jobs, clusters, and data outputs are running correctly.
+
+    This ensures a secure, validated, and fully traceable production deployment with both automation and human oversight.
 
 ---
 
@@ -146,8 +154,6 @@ This flow ensures a controlled, auditable release process:
 - Manual approvals before *Prod* release.  
 - Logs and metrics sent to Azure Monitor / Log Analytics  or Grafana.  
 - Safe, auditable, and repeatable pipeline for Databricks jobs.
-
-![Databricks Deployment Flow](docs/task2_deployment_diagram.png)
 
 ---
 
