@@ -1,24 +1,86 @@
 # Eurowings Scala Challenge
 
-## Task 1 – Spark Data Ingestion and Preparation
+##  Task 1 – Spark Data Ingestion and Preparation
 
 ### Overview
-This Scala/Spark app reads CSV files from an external partner (e.g. `Vertriebskanal_20250314.csv`), cleans them, and saves them into a Data Lake for reporting.  
-Each file is stored by date and dataset name, so every delivery can be traced easily.
+This Scala/Spark application reads CSV files from an external partner (e.g. `Vertriebskanal_20250314.csv`), cleans the data, and stores it in a Data Lake for reporting.  
+Each delivery is saved by dataset name and load date, making it easy to trace and validate new files.
+
+---
 
 ### Approach
-The pipeline follows a simple **Bronze → Silver → Gold** setup:
-- **Bronze:** Raw data stored as received.
-- **Silver:** Cleaned and formatted data.
-- **Gold:** Final table with a new column showing monthly change in *Erlöswert*.
+The pipeline follows a simple **Bronze → Silver → Gold** structure:
+
+- **Bronze:** Raw CSVs are stored exactly as received but validated for correct file type (`.csv`) and encoding.  
+  Invalid or empty files are skipped and logged.  
+- **Silver:** Data is cleaned — column names are standardized, unnecessary spaces and special characters removed, and types are cast to numeric or string as needed.  
+  Missing or invalid values (e.g. empty `Erlöswert`) are filled with defaults or flagged for review.  
+- **Gold:** Adds the derived field `erloeswert_change_prev_month` to show month-over-month change in revenue.
+
+---
+
+### Data Parameters and Validation
+- Checked columns: `Reiseveranstalter`, `Flughafen`, `Erlöswert (Tsd EUR)`, `Personenanzahl`, etc.  
+- Controlled string length for text fields to avoid downstream issues.  
+- Ensured numeric columns (`Erlöswert`, `Personenanzahl`) are valid decimals — no special characters.  
+- Handled fractional and negative values (as per business note: fractional = expected, negative = cancellations).  
+- Ensured schema consistency across files using Spark schema inference and `.option("enforceSchema", true)`.
+
+If more metadata were provided (e.g. region, currency, or booking source), we could extend the schema to enrich reporting and build better KPIs.
+
+---
 
 ### Tools
 Scala 2.12 • Spark 3.5 • sbt • Parquet/Delta • Config file (`application.conf`)
 
-### Run Locally
-```bash
+---
+
+###  Run Locally
+You can run the project manually or using a helper script.
+
+#### Option 1 – Direct Commands
+```
 sbt clean assembly
-spark-submit --class com.eurowingsholidays.ingest.Main target/scala-2.12/eurowings-scala-challenge-assembly-0.1.0.jar
+spark-submit --class com.eurowingsholidays.ingest.Main target/scala-2.12/eurowings-scala-challenge-assembly-0.1.0.
+```
+#### Option 2 – Using a Script
+
+Create a file called run.sh:
+
+```bash
+#!/bin/bash
+sbt clean assembly
+spark-submit --class com.eurowingsholidays.ingest.Main \
+  target/scala-2.12/eurowings-scala-challenge-assembly-0.1.0.jar
+```
+Give it permission to execute:
+
+```bash
+chmod 400 run.sh
+chmod +x run.sh
+./run.sh
+```
+
+This makes the project runnable on all platforms (Windows via Git Bash or Linux/Mac terminal).
+
+#### Notes on Data and Improvements
+
+- The sample data lacked some metadata like booking channels, product type, or time granularity — adding these would improve trend analysis.
+
+- With historical data over multiple years, we could build seasonality models or cancellation trends.
+
+- If the source provided unique booking IDs, we could also validate duplicates and detect anomalies in reporting.
+
+##### Output Summary
+
+  - /bronze: Raw CSVs with ingestion date partitions.
+
+  - /silver: Cleaned and standardized datasets.
+ 
+  - /gold: Final analytics-ready data with derived metrics.
+
+
+
 
 ##  Task 2 – Deployment on Databricks
 
@@ -59,22 +121,22 @@ External Partner (CSV Files)
 
 **CI/CD Flow**
 
-Developer (Personal Branch)  
+Developer (faeture Branch)  
 &emsp;│  
 &emsp;▼  
 PR → Merge to **Development**  
 &emsp;│  
 &emsp;▼  
- Build Pipeline  
+ **Build Pipeline**  
  ├ `sbt test`  
  ├ `sbt clean assembly`  
  └ Publish artifact to Azure Artifacts  
 &emsp;│  
 &emsp;▼  
-  Nightly deploy from **Main** → **Test**  
+🔁 Nightly deploy from **Main** → **Test**  
 &emsp;│  
 &emsp;▼  
- Manual approval → Deploy to **Prod** (Databricks CLI / API)  
+  Manual approval → Deploy to **Prod** (Databricks CLI / API)  
 
 ---
 
@@ -99,7 +161,7 @@ To make the pipeline stable and enterprise-ready, a few key improvements are req
 - Use **Delta Lake** for ACID updates, schema evolution, and history.  
 - Build a **Star Schema** in the Gold layer (fact + dimensions).  
 - Automate job triggers with **Databricks Workflows** or **ADF**.  
-- Add **data quality checks** (Great Expectations / Deequ).  
+- Add **data-quality checks** (Great Expectations / Deequ).  
 - Centralize **monitoring and alerts** in Azure Log Analytics.  
 - Secure access via **Key Vault**, RBAC, and encryption.  
 - Improve performance with **Auto-Optimize**, caching, and cluster pools.
