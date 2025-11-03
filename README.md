@@ -85,23 +85,15 @@ This makes the project runnable on all platforms (Windows via Git Bash or Linux/
 ##  Task 2 – Deployment on Databricks
 
 ### Overview
-The Spark job can be deployed on **Azure Databricks** to process new CSV deliveries automatically.  
-Code and jobs are managed through **Azure DevOps CI/CD**, which builds, tests, and deploys the job to different environments with approval control.
+The Spark job is deployed on **Azure Databricks** to process new CSV deliveries automatically.  
+Code and jobs are managed through **Azure DevOps CI/CD**, which builds, tests, and deploys the application  
+across different environments — Development, Test, and Production.  
+Nightly builds update the Test environment automatically, while Production releases require manual approval  
+with secure parameters, permissions, and Key Vault secrets.
 
 ---
 
-###  Databricks Deployment Flow (Azure DevOps – Realistic Setup)
-
-**Branching & Environments**
-- **Personal branches:** each developer works freely.  
-- **Development branch:** integrates personal work and runs tests.  
-- **Main branch:** reviewed and stable; used for nightly deployments.  
-- **Test:** environment updated nightly from *main*.  
-- **Prod:** manual approval required before release.
-
----
-
-**Data Flow**
+### **Data Flow**
 
 External Partner (CSV Files)  
 &emsp;│  
@@ -112,41 +104,50 @@ External Partner (CSV Files)
 **Databricks Workspace**  
 &emsp;├─ Spark Job (Bronze → Silver → Gold)  
 &emsp;├─ Delta Tables / Logs  
-&emsp;└─ Monitoring → Azure Log Analytics  
+&emsp;└─ Monitoring → Azure Log Analytics / Grafana  
 &emsp;│  
 &emsp;▼  
 **Analytics Layer (Power BI / Synapse)**  
 
 ---
 
-**CI/CD Flow**
+### **CI/CD Flow**
 
-Developer (faeture Branch)  
+Developer (Feature Branch)  
 &emsp;│  
 &emsp;▼  
-PR → Merge to **Development**  
+PR → Merge to **Main** (after code review)  
 &emsp;│  
 &emsp;▼  
- **Build Pipeline**  
- ├ `sbt test`  
- ├ `sbt clean assembly`  
+**Build Pipeline**  
+ ├ `sbt test` – run unit tests  
+ ├ `sbt clean assembly` – build application JAR  
  └ Publish artifact to Azure Artifacts  
 &emsp;│  
 &emsp;▼  
-🔁 Nightly deploy from **Main** → **Test**  
+🔁 **Nightly deploy** from **Main → Test** (automatic)  
 &emsp;│  
 &emsp;▼  
-  Manual approval → Deploy to **Prod** (Databricks CLI / API)  
+  **Manual approval → Deploy to Prod** using Databricks CLI or REST API  
+  • Inject secrets and configs from Azure Key Vault  
+  • Validate IP allow-lists and environment variables  
+  • Trigger job via `databricks jobs run-now`
 
 ---
+
+This flow ensures a controlled, auditable release process:  
+- Developers work safely on feature branches.  
+- Code is tested and validated nightly in Test.  
+- Production releases happen only with approvals and secure configurations.  
+- Logs and metrics are tracked through Databricks Jobs and Azure Monitoring.
 
 **Highlights**
 - Automatic nightly deploys to *Test* for validation.  
 - Manual approvals before *Prod* release.  
-- Logs and metrics sent to Azure Monitor / Log Analytics.  
+- Logs and metrics sent to Azure Monitor / Log Analytics  or Grafana.  
 - Safe, auditable, and repeatable pipeline for Databricks jobs.
 
-![Databricks DevOps Deployment Flow](docs/task2_deployment_diagram.png)
+![Databricks Deployment Flow](docs/task2_deployment_diagram.png)
 
 ---
 
