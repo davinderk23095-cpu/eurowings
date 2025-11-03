@@ -128,26 +128,27 @@ PR → Merge to **Main** (after code review)
 🔁 **Nightly deploy** from **Main → Test** (automatic)  
 &emsp;│  
 &emsp;▼  
-  **Manual Approval → Deploy to Prod**  
-    The Production release pipeline is triggered **manually** after validation and approval.  
-    Once started, it runs automatically — deploying the same artifact used in Test to the **Prod Databricks workspace**.  
-    The pipeline also generates and publishes **release documentation** (build version, change summary, configuration notes)  
-    automatically to the project Wiki or release page in Azure DevOps.
+🧱 **Manual Approval → Deploy to Prod**
 
-    After deployment, a **manual four-eyes check** is performed to verify:
-    - Key Vault secrets and environment-specific settings.  
-    - Connection parameters, permissions, and access configurations.  
-    - That all expected Databricks jobs, clusters, and data outputs are running correctly.
+The Production release pipeline is triggered **manually** after validation and approval.  
+Once started, it runs automatically — deploying the same artifact used in Test to the **Prod Databricks workspace**.  
+The pipeline also generates and publishes **release documentation** (build version, change summary, configuration notes)  
+automatically to the project Wiki or release page in Azure DevOps.
 
-    This ensures a secure, validated, and fully traceable production deployment with both automation and human oversight.
+After deployment, a **manual four-eyes check** is performed to verify:  
+- Key Vault secrets and environment-specific settings.  
+- Connection parameters, permissions, and access configurations.  
+- That all expected Databricks jobs, clusters, and data outputs are running correctly.  
+
+This ensures a secure, validated, and fully traceable production deployment with both automation and human oversight.
 
 ---
 
 This flow ensures a controlled, auditable release process:  
 - Developers work safely on feature branches.  
 - Code is tested and validated nightly in Test.  
-- Production releases happen only with approvals and secure configurations.  
-- Logs and metrics are tracked through Databricks Jobs and Azure Monitoring.
+- Production releases are approved, documented, and verified before go-live.
+
 
 **Highlights**
 - Automatic nightly deploys to *Test* for validation.  
